@@ -1,21 +1,22 @@
-package com.example;
+package tp2;
+
 /**
- * Ce type énuméré décrit les différentes 'type' de tapis roulant.
- * Un type de tapis roulant décrit la forme et la direction du tapis roulant dans
+ * Ce type enumere decrit les differentes 'type' de tapis roulant.
+ * Un type de tapis roulant decrit la forme et la direction du tapis roulant dans
  * une case de la grille.
- * La forme est décrite en indiquant le côté par lequel le tapis roulant arrive dans la case et
- * le côté par lequel le tapis roulant sort de la case.
+ * La forme est decrite en indiquant le côte par lequel le tapis roulant arrive dans la case et
+ * le côte par lequel le tapis roulant sort de la case.
  * L'ordre des mots dans le nom des constantes indique la direction du tapis roulant.
- * Par exemple, HAUT_DROITE indique une case où le tapis roulant arrive en haut de la case et tourne vers la
+ * Par exemple, HAUT_DROITE indique une case ou le tapis roulant arrive en haut de la case et tourne vers la
  * droite de la case.
- * Il y a deux constantes spéciales :
+ * Il y a deux constantes speciales :
  * VIDE : indique une case vide.
  * OCCUPE : indique une case qui contient autre chose qu'un tapis roulant.
  *
  * Ajout :
- * La description des tapis roulants est divisé en deux segments.
- *     segment 1 : la direction de la première partie du tapis roulant.
- *     segment 2 : la direction de la deuxième partie du tapis roulant.
+ * La description des tapis roulants est divise en deux segments.
+ *     segment 1 : la direction de la premiere partie du tapis roulant.
+ *     segment 2 : la direction de la deuxieme partie du tapis roulant.
  */
 public enum TapisRoulant {
 
@@ -90,8 +91,8 @@ public enum TapisRoulant {
     /**
      * Avance un Item qui est sur un tapis roulant.
      * @param i L'item que nous voulons avancer.
-     * @param distance La distance de réplacement pour l'item
-     * @return La distance non parcourue par l'item lorsqu'il n'y avait pas assez de place pour le déplacement
+     * @param distance La distance de replacement pour l'item
+     * @return La distance non parcourue par l'item lorsqu'il n'y avait pas assez de place pour le deplacement
      * complet.
      */
     public double avancer( Produit i, double distance, int posX, int posY ) {
@@ -110,12 +111,12 @@ public enum TapisRoulant {
     /*
      * Place un nouveau tapis roulant en tenant compte de l'ancien.
      *
-     * Le nouveau et l'ancien tapis roulant sont remplacé par un tapis roulant qui commence à la même place
+     * Le nouveau et l'ancien tapis roulant sont remplace par un tapis roulant qui commence à la même place
      * que l'ancien tapis et qui termine à la même place que le nouveau.  S'il n'y a pas d'ancien tapis,
-     * alors le nouveau tapis est placé.  Si le placement est impossible, alors une exception est lancée.
+     * alors le nouveau tapis est place.  Si le placement est impossible, alors une exception est lancee.
      * @param depart Le type du nouveau tapis.
      * @exception PlacementIncorrectException S'il est impossible de placer le tapis, soit parceque le nouveau
-     * tapis est VIDE ou OCCUPE, soit l'ancien tapis est OCCUPE, soit l'ancien commence où le nouveau termine.
+     * tapis est VIDE ou OCCUPE, soit l'ancien tapis est OCCUPE, soit l'ancien commence ou le nouveau termine.
      */
     public TapisRoulant combine( TapisRoulant depart ) {
         return
@@ -154,10 +155,10 @@ public enum TapisRoulant {
     }
 
     /**
-     * Retourne l'élément de l'énumération qui contient les directions indiquées.
-     * @param segment1 La direction que le résultat doit avoir dans le premier segment.
-     * @param segment2 La direction que le résultat doit avoir dans le deuxième segment.
-     * @return Le type de Tapis roulant qui a les directions demandées.
+     * Retourne l'element de l'enumeration qui contient les directions indiquees.
+     * @param segment1 La direction que le resultat doit avoir dans le premier segment.
+     * @param segment2 La direction que le resultat doit avoir dans le deuxieme segment.
+     * @return Le type de Tapis roulant qui a les directions demandees.
      */
     public static TapisRoulant trouver( Direction2D segment1, Direction2D segment2 ) {
         TapisRoulant resultat = null;

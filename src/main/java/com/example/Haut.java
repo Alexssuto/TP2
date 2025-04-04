@@ -1,6 +1,7 @@
-package com.example;
+package tp2;
+
 /**
- * La direction vers le haut sur la grille (direction négative sur l'Axe des y).
+ * La direction vers le haut sur la grille (direction negative sur l'Axe des y).
  */
 public class Haut extends Negative implements Vertical {
     public Haut() {

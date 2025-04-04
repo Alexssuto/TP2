@@ -1,4 +1,5 @@
-package com.example;
+package tp2;
+
 public abstract class Station {
     protected int positionX;
     protected int positionY;

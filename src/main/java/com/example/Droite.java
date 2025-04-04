@@ -1,4 +1,5 @@
-package com.example;
+package tp2;
+
 /**
  * La direction vers la droite sur la grille (direction positive sur l'Axe des x).
  */

@@ -1,4 +1,5 @@
-package com.example;
+package tp2;
+
 public class Produit {
     protected IdentiteProduit identite;
     /**

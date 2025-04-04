@@ -1,4 +1,5 @@
-package com.example;
+package tp2;
+
 public class PlacementIncorrectException extends RuntimeException {
     public PlacementIncorrectException() {
     }

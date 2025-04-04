@@ -1,6 +1,7 @@
-package com.example;
+package tp2;
+
 /**
- * La direction vers la gauche sur la grille (direction négative sur l'Axe des x).
+ * La direction vers la gauche sur la grille (direction negative sur l'Axe des x).
  */
 public class Gauche extends Negative implements Horizontale {
     public Gauche() {

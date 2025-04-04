@@ -1,4 +1,5 @@
-package com.example;
+package tp2;
+
 public abstract class Positive extends Direction2D {
     private static final double DIRECTION = 1.0;
     public Positive(int deltaX, int deltaY) {

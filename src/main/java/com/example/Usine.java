@@ -1,4 +1,7 @@
-package com.example;
+package tp2;
+
+import java.util.HashMap;
+
 public class Usine {
     protected int tailleX;
     protected int tailleY;
@@ -7,12 +10,13 @@ public class Usine {
     protected Logistique logistique;
     // contient les stations de l'usine.
     protected Station [][] stations;
-
+    protected HashMap<IdentiteProduit, Integer> sales;
     public Usine( int tailleX, int tailleY ) {
         this.tailleX = tailleX;
         this.tailleY = tailleY;
         logistique = new Logistique( tailleX, tailleY );
         stations = new Station[ tailleY ][ tailleX ];
+        sales = new HashMap<>();
     }
 
     public void setTapisHorizontal( int y, int x1, int x2 ) {
@@ -45,6 +49,6 @@ public class Usine {
     }
 
     public int getVente( IdentiteProduit idProduit ) {
-        return 0;
+        return sales.getOrDefault(idProduit, 0);
     }
 }

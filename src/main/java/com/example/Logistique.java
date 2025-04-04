@@ -1,4 +1,5 @@
-package com.example;
+package tp2;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,19 +14,19 @@ public class Logistique {
     private static Predicate< Double > presqueEntier = ( x ) -> Math.abs( x - Math.round(x) ) <= PRECISION;
 
     /*
-     * Caractère utilisé pour faire le contour des cadres pour le toString de la grille.
+     * Caractere utilise pour faire le contour des cadres pour le toString de la grille.
      */
     private static final String SEP_CHAR = "#";
 
     /*
-     * Va contenir la chaine de caractères qui sera placée entre chaque ligne de la grille pour le toString.
+     * Va contenir la chaine de caracteres qui sera placee entre chaque ligne de la grille pour le toString.
      * Elle sera construite une seule fois par instance, afin d'optimiser le code un peu.
      */
     private String fix;
 
     /**
      * Matrice contenant l'information sur les tapis roulant et l'usine.
-     * La première dimension est utilisé pour les 'y', la deuxième dimension est utilisé pour les 'x'.
+     * La premiere dimension est utilise pour les 'y', la deuxieme dimension est utilise pour les 'x'.
      *
      * Exemple : grille[y][x]
      */
@@ -78,10 +79,13 @@ public class Logistique {
      * @param x La position en 'x' de la case à modifier.  Cette valeur doit être entre 0 et TailleX - 1.
      * @param y La position en 'y' de la case à modifier.  Cette valeur doit être entre 0 et TailleY - 1.
      * @param type Le type de tapis roulant à placer dans la case.
-     * @exception IndexOutOfBoundsException Lancé si 'x' ou 'y' ne sont pas à l'intérieur de la grille.
+     * @exception IndexOutOfBoundsException Lance si 'x' ou 'y' ne sont pas à l'interieur de la grille.
      */
     public void setTapis( int x, int y, TapisRoulant type ) {
+
+
         grille[y][x] = type;
+    	
     }
 
     private void setPremierTapis( int x, int y, TapisRoulant type ) {
@@ -111,20 +115,24 @@ public class Logistique {
      *
      * @param x La position en 'x' de la case à modifier.  Cette valeur doit être entre 0 et TailleX - 1.
      * @param y La position en 'y' de la case à modifier.  Cette valeur doit être entre 0 et TailleY - 1.
-     * @exception IndexOutOfBoundsException Lancé si 'x' ou 'y' ne sont pas à l'intérieur de la grille.
+     * @exception IndexOutOfBoundsException Lance si 'x' ou 'y' ne sont pas à l'interieur de la grille.
      * @return Le Carre dans la grille.
      */
     public TapisRoulant getTapis( int x, int y ) {
+    	if (x >= grille[0].length || y >= grille.length || x < 0 || y < 0) {
+            return TapisRoulant.VIDE;
+        }
+    	
         return grille[y][x];
     }
 
     /**
-     * Vérifie si la case de la grille contient la fin d'un tapis roulant.
+     * Verifie si la case de la grille contient la fin d'un tapis roulant.
      *
      * C'est la fin d'un tapis roulant si la case à la suite du tapis roulant ne contient pas un tapis roulant
-     * qui à la même direction de départ que la direction d'arrivé de la case courante.
-     * @param x la coordonnée x de la case à tester.
-     * @param y la coordonnée y de la case à tester.
+     * qui à la même direction de depart que la direction d'arrive de la case courante.
+     * @param x la coordonnee x de la case à tester.
+     * @param y la coordonnee y de la case à tester.
      * @return true si c'est la fin d'un tapis roulant, false sinon.
      */
     public boolean caseValideFin(int x, int y ) {
@@ -143,13 +151,13 @@ public class Logistique {
     }
 
     /**
-     * Vérifie si la case de la grille contient le début d'un tapis roulant.
+     * Verifie si la case de la grille contient le debut d'un tapis roulant.
      *
-     * C'est le début d'un tapis roulant si la case avant le tapis roulant ne contient pas un tapis roulant
-     * qui à la même direction de fin que la direction de départ de la case courante.
-     * @param x la coordonnée x de la case à tester.
-     * @param y la coordonnée y de la case à tester.
-     * @return true si c'est le début d'un tapis roulant, false sinon.
+     * C'est le debut d'un tapis roulant si la case avant le tapis roulant ne contient pas un tapis roulant
+     * qui à la même direction de fin que la direction de depart de la case courante.
+     * @param x la coordonnee x de la case à tester.
+     * @param y la coordonnee y de la case à tester.
+     * @return true si c'est le debut d'un tapis roulant, false sinon.
      */
     public boolean caseValideDebut(int x, int y ) {
         boolean resultat = false;
@@ -173,16 +181,16 @@ public class Logistique {
      * Place des tapis roulant de la case (x1,y) à la case (x2,y) dans la grille.
      * Si x1 < x2, alors ce sont des TapisRoulant.GAUCHE_DROITE.
      * Si x2 < x1, alors ce sont des TapisRoulant.DROITE_GAUCHE.
-     * Si l'extrémité de départ du tapis roulant arrive sur l'extrémité final d'un autre tapis roulant, alors
-     * le bon tapis roulant est placé pour connecté les deux.
-     * Si l'extrémité final du tapis roulant arrive sur l'extrémité de départ d'un autre tapis roulant, alors
-     * le bon tapis roulant est placé pour connecté les deux.
+     * Si l'extremite de depart du tapis roulant arrive sur l'extremite final d'un autre tapis roulant, alors
+     * le bon tapis roulant est place pour connecte les deux.
+     * Si l'extremite final du tapis roulant arrive sur l'extremite de depart d'un autre tapis roulant, alors
+     * le bon tapis roulant est place pour connecte les deux.
      * Sinon, toutes les cases du nouveau tapis roulant doivent être vide.
      *
-     * @param y Le numéro de ligne où construire le tapis roulant.  Doit être entre 0 et TailleY - 1.
-     * @param x1 Le numéro de colonne où commence le tapis roulant.  Doit être entre 0 et TailleX - 1.
-     * @param x2 Le numéro de colonne où se termine le tapis roulant.  Doit être entre 0 et TailleX - 1.
-     * @exception PlacementIncorrectException Lancé s'il est impossible de placer le tapis roulant.
+     * @param y Le numero de ligne ou construire le tapis roulant.  Doit être entre 0 et TailleY - 1.
+     * @param x1 Le numero de colonne ou commence le tapis roulant.  Doit être entre 0 et TailleX - 1.
+     * @param x2 Le numero de colonne ou se termine le tapis roulant.  Doit être entre 0 et TailleX - 1.
+     * @exception PlacementIncorrectException Lance s'il est impossible de placer le tapis roulant.
      */
     public void setTapisHorizontal( int y, int x1, int x2 ) {
         int delta;
@@ -221,16 +229,16 @@ public class Logistique {
      * Place des tapis roulant de la case (x,y1) à la case (x,y2) dans la grille.
      * Si y1 < y2, alors ce sont des TapisRoulant.HAUT_BAS.
      * Si y2 < y1, alors ce sont des TapisRoulant.BAS_HAUT.
-     * Si l'extrémité de départ du tapis roulant arrive sur l'extrémité final d'un autre tapis roulant, alors
-     * le bon tapis roulant est placé pour connecté les deux.
-     * Si l'extrémité final du tapis roulant arrive sur l'extrémité de départ d'un autre tapis roulant, alors
-     * le bon tapis roulant est placé pour connecté les deux.
+     * Si l'extremite de depart du tapis roulant arrive sur l'extremite final d'un autre tapis roulant, alors
+     * le bon tapis roulant est place pour connecte les deux.
+     * Si l'extremite final du tapis roulant arrive sur l'extremite de depart d'un autre tapis roulant, alors
+     * le bon tapis roulant est place pour connecte les deux.
      * Sinon, toutes les cases du nouveau tapis roulant doivent être vide.
      *
-     * @param x Le numéro de colonne où construire le tapis roulant.  Doit être entre 0 et TailleX - 1.
-     * @param y1 Le numéro de ligne où commence le tapis roulant.  Doit être entre 0 et TailleY - 1.
-     * @param y2 Le numéro de ligne où se termine le tapis roulant.  Doit être entre 0 et TailleY - 1.
-     * @exception PlacementIncorrectException Lancé s'il est impossible de placer le tapis roulant.
+     * @param x Le numero de colonne ou construire le tapis roulant.  Doit être entre 0 et TailleX - 1.
+     * @param y1 Le numero de ligne ou commence le tapis roulant.  Doit être entre 0 et TailleY - 1.
+     * @param y2 Le numero de ligne ou se termine le tapis roulant.  Doit être entre 0 et TailleY - 1.
+     * @exception PlacementIncorrectException Lance s'il est impossible de placer le tapis roulant.
      */
     public void setTapisVertical( int x, int y1, int y2 ) {
         int delta;
@@ -270,11 +278,11 @@ public class Logistique {
     /**
      * Place un item sur le tapis roulant.
      *
-     *  L'item est placé sur le tapis roulant présent à la case (x,y).
-     * @param x Le numéro de colonne où placer l'item.  Doit être entre 0 et TailleX - 1.
-     * @param y Le numéro de ligne où placer l'item.  Doit être entre 0 et TailleY - 1.
+     *  L'item est place sur le tapis roulant present à la case (x,y).
+     * @param x Le numero de colonne ou placer l'item.  Doit être entre 0 et TailleX - 1.
+     * @param y Le numero de ligne ou placer l'item.  Doit être entre 0 et TailleY - 1.
      * @param produit L'item à placer.  Ne doit pas être null.
-     * @exception PlacementIncorrectException Lancé s'il n'y a pas de tapis roulant à la position indiqué.
+     * @exception PlacementIncorrectException Lance s'il n'y a pas de tapis roulant à la position indique.
      */
     public void placerItem( int x, int y, Produit produit ) {
         if( grille[y][x] == TapisRoulant.VIDE || grille[y][x] == TapisRoulant.OCCUPE ) {
@@ -298,14 +306,14 @@ public class Logistique {
 
     /**
      * Indique s'il y a au moins un item dans la case.
-     * @param x Le numéro de colonne à vérifier.  Doit être entre 0 et TailleX - 1.
-     * @param y Le numéro de ligne à vérifier.  Doit être entre 0 et TailleY - 1.
+     * @param x Le numero de colonne à verifier.  Doit être entre 0 et TailleX - 1.
+     * @param y Le numero de ligne à verifier.  Doit être entre 0 et TailleY - 1.
      * @return true si le tapis roulant contiens au moins un item, false sinon.
      */
     public boolean contiensItem( int x, int y ) {
         int position = 0;
 
-        while( position < produits.size() && ! estALaCoordonnee( produits.get( position ), x, y ) ) {
+        while( position < produits.size() && !estALaCoordonnee( produits.get( position ), x, y ) ) {
             ++ position;
         }
 
@@ -313,12 +321,12 @@ public class Logistique {
     }
 
     /**
-     * Retourne l'item le plus proche de la fin du TapisRoulant à la case indiquée.
+     * Retourne l'item le plus proche de la fin du TapisRoulant à la case indiquee.
      *
-     * @param x Le numéro de colonne où consulter un item.  Doit être entre 0 et TailleX - 1.
-     * @param y Le numéro de ligne où consulter un item.  Doit être entre 0 et TailleY - 1.
-     * @return L'item consulté.  L'Item n'est pas enlevé.
-     * S'il n'y a pas d'item dans cette case, alors null est retourné.
+     * @param x Le numero de colonne ou consulter un item.  Doit être entre 0 et TailleX - 1.
+     * @param y Le numero de ligne ou consulter un item.  Doit être entre 0 et TailleY - 1.
+     * @return L'item consulte.  L'Item n'est pas enleve.
+     * S'il n'y a pas d'item dans cette case, alors null est retourne.
      */
     public Produit trouverItem( int x, int y ) {
         Produit resultat = null;
@@ -345,13 +353,13 @@ public class Logistique {
     }
 
     /**
-     * Enlève un item du tapis roulant à la case indiqué.
+     * Enleve un item du tapis roulant à la case indique.
      *
-     * L'item enlevé est retourné.  S'il y a plus d'un item dans la case, alors l'item le plus proche de la
-     * fin du tapis roulant est retiré.
-     * @param x Le numéro de colonne où enlevé un item.  Doit être entre 0 et TailleX - 1.
-     * @param y Le numéro de ligne où enlevé un item.  Doit être entre 0 et TailleY - 1.
-     * @return L'item enlevé.  S'il n'y a pas d'item dans cette case, alors null est retourné.
+     * L'item enleve est retourne.  S'il y a plus d'un item dans la case, alors l'item le plus proche de la
+     * fin du tapis roulant est retire.
+     * @param x Le numero de colonne ou enleve un item.  Doit être entre 0 et TailleX - 1.
+     * @param y Le numero de ligne ou enleve un item.  Doit être entre 0 et TailleY - 1.
+     * @return L'item enleve.  S'il n'y a pas d'item dans cette case, alors null est retourne.
      */
     public Produit extraireItem( int x, int y ) {
         Produit resultat = trouverItem( x, y );
@@ -364,9 +372,9 @@ public class Logistique {
     }
 
     /**
-     * Retourne la liste des Items présent dans la grille.
+     * Retourne la liste des Items present dans la grille.
      * Les items restent dans la grille, c'est seulement pour pouvoir les consulter.
-     * @return La liste des items présent dans la grille.  S'il n'y a pas d'item, alors la liste est vide.
+     * @return La liste des items present dans la grille.  S'il n'y a pas d'item, alors la liste est vide.
      */
     public List< Produit > consulterItems() {
         return produits;
@@ -401,7 +409,7 @@ public class Logistique {
     }
 
     /**
-     * Fait avancer les Items sur les Tapis Roulants.  Si un item dépasse un tapis roulant, il disparait.
+     * Fait avancer les Items sur les Tapis Roulants.  Si un item depasse un tapis roulant, il disparait.
      */
     public void tic() {
         for( int i = produits.size() - 1; i >= 0; -- i ) {
@@ -410,10 +418,10 @@ public class Logistique {
     }
 
     /**
-     * Construit une chaine de caractères pour afficher une ligne de la matrice en utilisant une ligne à l'écran.
+     * Construit une chaine de caracteres pour afficher une ligne de la matrice en utilisant une ligne à l'ecran.
      * @param ligne La ligne à afficher
-     * @param m La fonction d'extraction pour trouver les caractères qui affiche le tapis roulant.
-     * @return La chaine de caractères représentant la ligne de la matrice.
+     * @param m La fonction d'extraction pour trouver les caracteres qui affiche le tapis roulant.
+     * @return La chaine de caracteres representant la ligne de la matrice.
      */
     private String toStringTier( TapisRoulant[] ligne, Function< TapisRoulant, String> m ) {
         return Arrays.stream( ligne )
@@ -422,9 +430,9 @@ public class Logistique {
     }
 
     /**
-     * Construit une chaine de caractères pour afficher une ligne de la matrice en utilisant 3 lignes à l'écran.
+     * Construit une chaine de caracteres pour afficher une ligne de la matrice en utilisant 3 lignes à l'ecran.
      * @param ligne La ligne à afficher
-     * @return La chaine de caractères représentant la ligne de la matrice.
+     * @return La chaine de caracteres representant la ligne de la matrice.
      */
     private String toStringLigne( TapisRoulant[] ligne ) {
         return
@@ -432,10 +440,12 @@ public class Logistique {
                 toStringTier( ligne, TapisRoulant::afficheMilieu ) +
                 toStringTier( ligne, TapisRoulant::afficheBas );
     }
-
+    public List<Produit> getProduits() {
+        return this.produits;
+    }
     /**
-     * Transforme la matrice de la grille en une chaine de caractères.
-     * @return La chaine de caractères représentant les tapis roulant de la matrice.
+     * Transforme la matrice de la grille en une chaine de caracteres.
+     * @return La chaine de caracteres representant les tapis roulant de la matrice.
      */
     @Override
     public String toString() {

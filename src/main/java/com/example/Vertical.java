@@ -1,6 +1,7 @@
-package com.example;
+package tp2;
+
 /**
- * Décrit l'axe des 'y'.
+ * Decrit l'axe des 'y'.
  */
 public interface Vertical extends Axe {
     @Override
