@@ -1,0 +1,19 @@
+package com.example;
+public enum IdentiteProduit {
+    ACANTHITE,
+    CASSITERITE,
+    CHALCOCITE,
+    CHARBON,
+    COKE,
+    LINGOT_ARGENT,
+    LINGOT_BRONZE,
+    LINGOT_CUIVRE,
+    LINGOT_ETAIN,
+    LITHARGE,
+    OXYDE_ARGENT,
+    OXYDE_CUIVRE,
+    OXYDE_ETAIN,
+    POUDRE_ACANTHITE,
+    POUDRE_CASSITERITE,
+    POUDRE_CHALCOCITE,
+}
